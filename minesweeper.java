@@ -12,7 +12,7 @@ public class minesweeper{
 			map = new Map(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]));
 		else
 			map = new Map();
-		map.printMap();
+		System.out.println(map.printMap());
 		Scanner sc = new Scanner(System.in);
 		boolean quit = false;
 		System.out.println("Rules:\n1. To start the game, chose anywhere on the board to dig\n2. Each Spot that does not have a bomb on it will have a number that tells you how many bombs are in a 3x3 square around the square.\n3. If you dig on a square that has bomb, the game will be over.");
