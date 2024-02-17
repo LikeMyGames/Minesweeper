@@ -10,7 +10,7 @@ public class minesweeper{
 		boolean quit = false;
 		System.out.println("Rules:\n1. To start the game, chose anywhere on the board to dig\n2. Each Spot that does not have a bomb on it will have a number that tells you how many bombs are in a 3x3 square around the square.\n3. If you dig on a square that has bomb, the game will be over.");
 		while(true){
-		    System.out.println("1. dig\n2. flag\n3. print\n4. rules\n5. quit");
+		    System.out.println("\n1. dig\n2. flag\n3. print\n4. rules\n5. quit\n");
 			String resp = sc.nextLine();
 			int x = 0;
 			int y = 0;
@@ -47,7 +47,8 @@ public class minesweeper{
 						}
 						System.out.println("Please input valid value (between 0 and 9");
 					}
-					map.dig(x, y);
+					quit = map.dig(x, y);
+					map.printMap();
 					break;
 				case "flag":
 					x = 0;
@@ -81,9 +82,12 @@ public class minesweeper{
 						}
 						System.out.println("Please input valid value (between 0 and 9");
 					}
+					map.markFlag(x, y);
+					map.printMap();
 					break;
 				case "quit":
-					return;
+					quit = true;
+					break;
 				case "print":
 					map.printMap();
 					break;
@@ -91,6 +95,10 @@ public class minesweeper{
 					System.out.println("Rules:\n1. To start the game, chose anywhere on the board to dig\n2. Each Spot that does not have a bomb on it will have a number that tells you how many bombs are in a 3x3 square around the square.\n3. If you dig on a square that has bomb, the game will be over.");
 			}
 		    if(quit){
+				System.out.println("You lost the game, better luck next time.");
+				System.out.println("The bombs were located at:");
+				System.out.println(map.printBombLocs());
+				System.out.println(map.printMapWithBombs());
 				sc.close();
 		        return;
 		    }
