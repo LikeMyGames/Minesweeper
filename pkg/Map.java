@@ -16,6 +16,8 @@ public class Map {
     }
     
     public Map(int size){
+		if(size > 99)
+			size = 99;
         map = new String[size][size];
 		for(int i = 0; i<map.length; i++){
 		    for(int j = 0; j<map[0].length; j++){
@@ -27,6 +29,10 @@ public class Map {
     }
     
     public Map(int height, int width, int numOfBombs){
+		if(height > 99)
+			height = 99;
+		if(width > 99)
+			width = 99;
         map = new String[height][width];
 		for(int i = 0; i<map.length; i++){
 		    for(int j = 0; j<map[0].length; j++){
@@ -54,22 +60,36 @@ public class Map {
 	}
     
     
-	public void printMap(){
-	    for(int i = 0; i<map[0].length; i++){
-	        System.out.print("---");
+	public String printMap(){
+		String str = "";
+		str += "  ";
+		for(int i = 0; i<map[0].length; i++){
+			Integer I = i;
+			String iStr = I.toString();
+			if(iStr.length() == 1)
+	        	str += "--" + iStr;
+			else if(iStr.length() == 2)
+				str += iStr;
 	    }
-	    System.out.println("-");
+	    str += "-\n";
 	    for(int i = 0; i<map.length; i++){
+			str += i + " ";
 	        for(int j = 0; j<map[0].length; j++){
-	            System.out.print("| " + map[i][j]);
+	            str += "| " + map[i][j];
 	        }
-	        System.out.println("|");
+	        str += "|\n";
 	    }
+		str += "  ";
 	    for(int i = 0; i<map[0].length; i++){
-	        System.out.print("---");
+	        Integer I = i;
+			String iStr = I.toString();
+			if(iStr.length() == 1)
+	        	str += "--" + iStr;
+			else if(iStr.length() == 2)
+				str += iStr;
 	    }
-	    System.out.println("-");
-	    return;
+	    str += "-\n";
+		return str;
 	}
 
 	public String[][] getMap(){
@@ -78,8 +98,8 @@ public class Map {
 
 	public int calcNearByBombs(int x, int y){
 		int totBombs = 0;
-		for(int i = y-1; i<y+1; i++){
-			for(int j = x-1; j<x+1; j++){
+		for(int i = y-1; i<y+2; i++){
+			for(int j = x-1; j<x+2; j++){
 				if((i >= 0 && i < map.length) && (j >= 0 && j < map[0].length)){
 					//System.out.println("[" + j + ", " + i + "]: " + bombLocs[i][j]);
 					if(bombLocs[i][j]){
@@ -160,11 +180,18 @@ public class Map {
 
 	public String printMapWithBombs(){
 		String str = "";
+		str += "  ";
 		for(int i = 0; i<map[0].length; i++){
-	        str += "---";
+			Integer I = i;
+			String iStr = I.toString();
+			if(iStr.length() == 1)
+	        	str += "--" + iStr;
+			else if(iStr.length() == 2)
+				str += iStr;
 	    }
 	    str += "-\n";
 	    for(int i = 0; i<map.length; i++){
+			str += i + " ";
 	        for(int j = 0; j<map[0].length; j++){
 				if(bombLocs[i][j]){
 					str += "| B";
@@ -175,8 +202,14 @@ public class Map {
 	        }
 	        str += "|\n";
 	    }
+		str += "  ";
 	    for(int i = 0; i<map[0].length; i++){
-	        str += "---";
+	        Integer I = i;
+			String iStr = I.toString();
+			if(iStr.length() == 1)
+	        	str += "--" + iStr;
+			else if(iStr.length() == 2)
+				str += iStr;
 	    }
 	    str += "-\n";
 		return str;

@@ -55,7 +55,7 @@ public class minesweeper{
 						System.out.println("Please input valid value (between 0 and 9");
 					}
 					quit = map.dig(x, y);
-					map.printMap();
+					System.out.println(map.printMap());
 					break;
 				case "flag":
 					x = 0;
@@ -90,13 +90,13 @@ public class minesweeper{
 						System.out.println("Please input valid value (between 0 and 9");
 					}
 					map.markFlag(x, y);
-					map.printMap();
+					System.out.println(map.printMap());
 					break;
 				case "quit":
 					quit = true;
 					break;
 				case "print":
-					map.printMap();
+				System.out.println(map.printMap());
 					break;
 				case "rules":
 					System.out.println("Rules:\n1. To start the game, chose anywhere on the board to dig\n2. Each Spot that does not have a bomb on it will have a number that tells you how many bombs are in a 3x3 square around the square.\n3. If you dig on a square that has bomb, the game will be over.");
