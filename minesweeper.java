@@ -3,8 +3,15 @@ import pkg.Map;
 
 public class minesweeper{
 	public static void main(String[] args) {
-	    
-		Map map = new Map();
+	    Map map;
+		if(args.length == 0)
+			map = new Map();
+		else if(args.length == 1)
+			map = new Map(Integer.parseInt(args[0]));
+		else if(args.length == 3)
+			map = new Map(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+		else
+			map = new Map();
 		map.printMap();
 		Scanner sc = new Scanner(System.in);
 		boolean quit = false;

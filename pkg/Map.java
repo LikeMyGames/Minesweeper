@@ -81,7 +81,7 @@ public class Map {
 		for(int i = y-1; i<y+1; i++){
 			for(int j = x-1; j<x+1; j++){
 				if((i >= 0 && i < map.length) && (j >= 0 && j < map[0].length)){
-					System.out.println("[" + j + ", " + i + "]: " + bombLocs[i][j]);
+					//System.out.println("[" + j + ", " + i + "]: " + bombLocs[i][j]);
 					if(bombLocs[i][j]){
 						totBombs++;
 					}
