@@ -1,5 +1,6 @@
-import java.util.*;
-import pkg.Map;
+import java.util.Scanner;
+
+import pkg.*;
 
 public class minesweeper{
 	public static void main(String[] args) {
