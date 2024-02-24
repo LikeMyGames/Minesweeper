@@ -3,34 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minesweeper</title>
+    <title>MINESWEEPER</title>
 </head>
 <body>
     <div id="background">
         <div id="menu">
-            <h1>
-                Minesweeper
+            <h1 style="margin-top: 0px;">
+                MINESWEEPER
             </h1>
             <div style="margin: auto; text-align: center;">
-                <div id="menuButton" style="margin-bottom: 20px; margin-left: 100px; margin-right: 100px;">
-                    <label for="rows" style="margin-top: 30px;">Rows: </label>
-                    <input type="text" id="rows" name="rows">
+                <div id="menuButton" style="margin-bottom: 20px; margin-left: auto; margin-right: auto; width: 50%;">
+                    <input type="text" id="columns" name="columns" placeholder="Columns">
                     <br>
-                    <label for="columns">Columns: </label>
-                    <input type="text" id="columns" name = columns style="margin-bottom: 10px;">
-                    <br>
+                    <input type="text" id="rows" name="rows" placeholder="Rows">
                 </div>
-                <button id="menuButton" onclick="troll()" style="top: 10px">
+                <button id="menuButton" onclick="startGame()" style="top: 10px; margin-bottom: 20px;">
                     <p>
-                        start game
+                        START GAME
                     </p>
                 </button>
             </div>
         </div>
+        <div id="game">
+            <div id="gameMenu" style="left: 0; top: 0;">
+                <div style="height: 20px; text-align: center; position: absolute; top: 10px; left: 40%;" id="flagCount">
+                    <img src="images\FlagIcon.png" style="height: 20px; position: absolute; left: 0px;">
+                    <p id="flagCounter" style="position: absolute; margin: 0px; width: 40px; height: 20px; left: 25px;">
+                        50
+                    </p>
+                </div>
+            </div>
+            <div id="gameBoard">
+            </div>
+        </div>
     </div>
     <script>
-        function troll(){
-            alert("get trolled")
+        function startGame(){
+            var menu = document.getElementById("menu");
+            var game = document.getElementById("game");
+            var gameBoard = document.getElementById("gameBoard");
+            var columns = document.getElementById("columns").value;
+            var rows = document.getElementById("rows").value;
+            if(columns === "" || rows === ""){
+                alert("Please give column and row values");
+                return;
+            } else if(columns < 3 || rows < 3){
+                alert("Please provide column and row numbers that are both greater than or equal to 3");
+                return;
+            }
+            alert(columns + " by " + rows + " Minesweeper game started! Enjoy the game!");
+            game.style.display = "block";
+            menu.style.display = "none";
+            let map = [];
+            for(var i = 0; i<rows; i++){
+                map[i] = [];
+                for(var j = 0; j<columns; j++){
+                    if((j+1)%2 == 0){
+                        map[i][j] = elementFromHTML(`
+                        <div id="gameTileDark" style="position: absolute; left: 0; top: 0; width: 100px; height: 100px; outline: 0px solid black;">
+                            <button id="gameTileDark" onclick="openSelector()" style="position: absolute; left: 0; top: 0;  width: 100px; height: 100px; outline: 0px solid black;">
+
+                            </button>
+                        </div>
+                        `);
+                    } else{
+                        map[i][j] = elementFromHTML(`
+                        <div id="gameTileLight" style="position: absolute; left: 0; top: 0;  width: 100px; height: 100px; outline: 0px solid black;">
+                            <button id="gameTileLight" onclick="openSelector()" style="position: absolute; left: 0; top: 0;  width: 100px; height: 100px; outline: 0px solid black;">
+
+                            </button>
+                        </div>
+                        `);
+                    } 
+                    gameBoard.appendChild(map[i][j]);
+                    map[i][j].style.top = i*100;
+                    map[i][j].style.left = j*100;
+                }
+            }
+            var gridWidth = 100*columns;
+            gameBoard.style.width = gridWidth;
+            alert(gridWidth);
+            var gridHeight = 100*rows;
+            gameBoard.style.height = gridHeight;
+            alert(gridHeight);
+            game.style.width = gridWidth + 80;
+            game.style.height = gridHeight + 80;
+            
+            
+            
+
+            runGame();
+        }
+
+        function runGame(map){
+            var board = document.getElementById("game");
+
+        }
+
+        function elementFromHTML(html){
+            const template = document.createElement("template");
+            template.innerHTML = html.trim();
+            return template.content.firstElementChild;
+        }
+
+        function openSelector(){
+
         }
     </script>
     <style>
@@ -40,35 +117,95 @@
             right: 0;
             top: 0;
             bottom: 0;
-            background-size: 5vw;
+            background-size: 10vw;
             background-image: url('images/backgroundTile.png');
         }
         #menu{
             position: relative;
             margin-left: auto;
             margin-right: auto;
-            width: 50%;
+            width: 25%;
+            top: 10vh;
             margin-top: 20vh;
-            border: 5px solid #FFCD92;
+            border: 5px solid #e6e1d8ff;
             background-color: #43ff43;
             text-align: center;
+            display: block;
         }
         #menuButton{
             background-color: #00d000;
-            outline: 0px solid #FFCD92;
-            border: 3px solid #FFCD92;
+            outline: 0px solid #e6e1d8ff;
+            border: 5px solid #e6e1d8ff;
             text-align: center;
         }
         #game{
-
+            display: none;
+            border: 2px solid #e6e1d8ff;
+            background-color: #b3afa8;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #gameBoard{
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            border: 5px solid #e6e1d8ff;
         }
         #gameTileDark{
-
+            width: 100px;
+            width: 100px;
+            background-color: #00d000;
         }
         #gameTileLight{
-
+            width: 100px;
+            width: 100px;
+            background-color: #43ff43;
+        }
+        #flagCount{
+            position: absolute;
+            margin: 0px;
+            width: 40px;
+            height: 20px;
+            left: 25px;
+        }
+        #gameMenu{
+            text-align: center;
+        }
+        #rows{
+            outline: 0px solid #e6e1d8ff;
+            border: 5px solid #e6e1d8ff;
+            background-color: #43ff43;
+            text-align: center;
+            width: 40%;
+            color: #b3afa8;
+            margin-bottom: 10px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        #columns{
+            outline: 0px solid #e6e1d8ff;
+            border: 5px solid #e6e1d8ff;
+            background-color: #43ff43;
+            text-align: center;
+            width: 40%;
+            color: #b3afa8;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
         h1{
+            color: white;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: bolder;
+            text-align: center;
+        }
+        p{
+            color: white;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: bolder;
+            text-align: center;
+        }
+        label{
             color: white;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
             font-weight: bolder;
