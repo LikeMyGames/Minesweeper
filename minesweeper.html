@@ -11,10 +11,27 @@
             <h1>
                 Minesweeper
             </h1>
+            <div style="margin: auto; text-align: center;">
+                <div id="menuButton" style="margin-bottom: 20px; margin-left: 100px; margin-right: 100px;">
+                    <label for="rows" style="margin-top: 30px;">Rows: </label>
+                    <input type="text" id="rows" name="rows">
+                    <br>
+                    <label for="columns">Columns: </label>
+                    <input type="text" id="columns" name = columns style="margin-bottom: 10px;">
+                    <br>
+                </div>
+                <button id="menuButton" onclick="troll()" style="top: 10px">
+                    <p>
+                        start game
+                    </p>
+                </button>
+            </div>
         </div>
     </div>
     <script>
-
+        function troll(){
+            alert("get trolled")
+        }
     </script>
     <style>
         #background{
@@ -27,15 +44,20 @@
             background-image: url('images/backgroundTile.png');
         }
         #menu{
+            position: relative;
             margin-left: auto;
             margin-right: auto;
             width: 50%;
             margin-top: 20vh;
             border: 5px solid #FFCD92;
             background-color: #43ff43;
+            text-align: center;
         }
         #menuButton{
             background-color: #00d000;
+            outline: 0px solid #FFCD92;
+            border: 3px solid #FFCD92;
+            text-align: center;
         }
         #game{
 
