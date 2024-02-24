@@ -54,8 +54,10 @@ class Map{
 			loadBombs(numOfBombs);
 		}
 		void loadBombs(int bombs){
-			int rows = sizeof(bombLocs) / sizeof(bombLocs[0]);
-			int columns = sizeof(bombLocs[0]) / sizeof(bool);
+			//int rows = sizeof(bombLocs) / sizeof(bombLocs[0]);
+			int rows = bombLocs.size();
+			//int columns = sizeof(bombLocs[0]) / sizeof(bool);
+			int columns = bombLocs[0].size();
 			while(bombs >= 0){
 				for(int i = 0; i<rows; i++){
 					for(int j = 0; j<columns; j++){
