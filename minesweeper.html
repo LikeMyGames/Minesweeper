@@ -23,6 +23,28 @@
                     </p>
                 </button>
             </div>
+            <div style="width: 80px; height: 80px; display: none;" id="actionSelector">
+                <!--
+                <button style="position: absolute; left: 0px; top: 0px; width: 40px; height: 40px; background-image: url('images/FlagButton.png'); background-size: 40px; outline: 0px solid black; border: 0px solid black;">
+
+                </button>
+                <button style="position: absolute; left: 0px; top: 70px; width: 40px; height: 40px; background-image: url('images/CloseButton.png'); background-size: 40px; outline: 0px solid black; border: 0px solid black;">
+
+                </button>
+                <button style="position: absolute; left: 70px; top: 70px; width: 40px; height: 40px; background-image: url('images/DigButton.png'); background-size: 40px; outline: 0px solid black; border: 0px solid black;">
+
+                </button>
+                -->
+                <button style="border-width: 0px; padding: 0px; position: absolute; left: 0px; top: 0px; width: 35px; height: 35px; background-color: #00000000">
+                    <img src="images/FlagButton.png" style="width: 35px; height: 35px; margin: 0px;">
+                </button>
+                <button style="border-width: 0px; padding: 0px; position: absolute; left: 0px; top: 45px; width: 35px; height: 35px; background-color: #00000000">
+                    <img src="images/CloseButton.png" style="width: 35px; height: 35px; margin: 0px;">
+                </button>
+                <button style="border-width: 0px; padding: 0px; position: absolute; left: 45px; top: 45px; width: 35px; height: 35px; background-color: #00000000">
+                    <img src="images/DigButton.png" style="width: 35px; height: 35px; margin: 0px;">
+                </button>
+            </div>
         </div>
         <div id="game">
             <div id="gameMenu" style="left: 0; top: 0;">
@@ -34,6 +56,29 @@
                 </div>
             </div>
             <div id="gameBoard">
+                <div style="z-index: 10; position: absolute; top: 0px; left: 0px; width: 80px; height: 80px;" id="actionSelector">
+                    <!--
+                    <button style="position: absolute; left: 0px; top: 0px; width: 40px; height: 40px; background-image: url('images/FlagButton.png'); background-size: 40px; outline: 0px solid black; border: 0px solid black;">
+    
+                    </button>
+                    <button style="position: absolute; left: 0px; top: 70px; width: 40px; height: 40px; background-image: url('images/CloseButton.png'); background-size: 40px; outline: 0px solid black; border: 0px solid black;">
+    
+                    </button>
+                    <button style="position: absolute; left: 70px; top: 70px; width: 40px; height: 40px; background-image: url('images/DigButton.png'); background-size: 40px; outline: 0px solid black; border: 0px solid black;">
+    
+                    </button>
+                    -->
+                    <button style="border-width: 0px; padding: 0px; position: absolute; left: 0px; top: 0px; width: 35px; height: 35px; background-color: #00000000">
+                        <img src="images/FlagButton.png" style="width: 35px; height: 35px; margin: 0px;">
+                    </button>
+                    <button style="border-width: 0px; padding: 0px; position: absolute; left: 0px; top: 45px; width: 35px; height: 35px; background-color: #00000000">
+                        <img src="images/CloseButton.png" style="width: 35px; height: 35px; margin: 0px;">
+                    </button>
+                    <button style="border-width: 0px; padding: 0px; position: absolute; left: 45px; top: 45px; width: 35px; height: 35px; background-color: #00000000">
+                        <img src="images/DigButton.png" style="width: 35px; height: 35px; margin: 0px;">
+                    </button>
+                </div>
+            </div>
             </div>
         </div>
     </div>
@@ -44,6 +89,8 @@
             var gameBoard = document.getElementById("gameBoard");
             var columns = document.getElementById("columns").value;
             var rows = document.getElementById("rows").value;
+            var actionSelector = document.getElementById("actionSelector");
+            actionSelector.style.display = "none";
             if(columns === "" || rows === ""){
                 alert("Please give column and row values");
                 return;
@@ -58,10 +105,10 @@
             for(var i = 0; i<rows; i++){
                 map[i] = [];
                 for(var j = 0; j<columns; j++){
-                    if((j+1)%2 == 0){
+                    if((j+i)%2 == 0){
                         map[i][j] = elementFromHTML(`
                         <div id="gameTileDark" style="position: absolute; left: 0; top: 0; width: 100px; height: 100px; outline: 0px solid black;">
-                            <button id="gameTileDark" onclick="openSelector()" style="position: absolute; left: 0; top: 0;  width: 100px; height: 100px; outline: 0px solid black;">
+                            <button id="gameTileDark" onclick="openSelector(this)" style="position: absolute; left: 0; top: 0;  width: 100px; height: 100px; outline: 0px solid black;">
 
                             </button>
                         </div>
@@ -69,34 +116,33 @@
                     } else{
                         map[i][j] = elementFromHTML(`
                         <div id="gameTileLight" style="position: absolute; left: 0; top: 0;  width: 100px; height: 100px; outline: 0px solid black;">
-                            <button id="gameTileLight" onclick="openSelector()" style="position: absolute; left: 0; top: 0;  width: 100px; height: 100px; outline: 0px solid black;">
+                            <button id="gameTileLight" onclick="openSelector(this)" style="position: absolute; left: 0; top: 0;  width: 100px; height: 100px; outline: 0px solid black;">
 
                             </button>
                         </div>
                         `);
                     } 
                     gameBoard.appendChild(map[i][j]);
-                    map[i][j].style.top = i*100;
-                    map[i][j].style.left = j*100;
+                    map[i][j].style.top = "" + i*100 + "px";
+                    map[i][j].style.left = "" + j*100 + "px";
                 }
             }
-            var gridWidth = 100*columns;
+            var gridWidth = "" + 100*columns + "px";
             gameBoard.style.width = gridWidth;
-            alert(gridWidth);
-            var gridHeight = 100*rows;
+            var gridHeight = "" + 100*rows + "px";
             gameBoard.style.height = gridHeight;
-            alert(gridHeight);
             game.style.width = gridWidth + 80;
             game.style.height = gridHeight + 80;
             
             
             
 
-            runGame();
+            runGame(map);
         }
 
         function runGame(map){
             var board = document.getElementById("game");
+
 
         }
 
@@ -106,8 +152,23 @@
             return template.content.firstElementChild;
         }
 
-        function openSelector(){
+        function openSelector(tile){
+            var selector = document.getElementById("actionSelector");
+            selector.style.display = "block";
+            var y = tile.style.top + 10;
+            var x = tile.style.left + 10;
+        }
 
+        function dig(){
+
+        }
+
+        function flag(){
+
+        }
+        function closeSelector(){
+            var selector = document.getElementById("actionSelector");
+            selector.style.display = "none";
         }
     </script>
     <style>
@@ -156,11 +217,13 @@
             width: 100px;
             width: 100px;
             background-color: #00d000;
+            outline: 0px solid #e6e1d8ff;
         }
         #gameTileLight{
             width: 100px;
             width: 100px;
             background-color: #43ff43;
+            outline: 0px solid #e6e1d8ff;
         }
         #flagCount{
             position: absolute;
