@@ -47,13 +47,13 @@
     
                     </button>
                     -->
-                    <button style="border-width: 0px; padding: 0px; position: absolute; left: 0px; top: 0px; width: 35px; height: 35px; background-color: #00000000">
+                    <button onclick="flag()"style="outline-width: 0px; border-width: 0px; padding: 0px; position: absolute; left: 0px; top: 0px; width: 35px; height: 35px; background-color: #00000000">
                         <img src="images/FlagButton.png" style="width: 35px; height: 35px; margin: 0px;">
                     </button>
-                    <button style="border-width: 0px; padding: 0px; position: absolute; left: 0px; top: 45px; width: 35px; height: 35px; background-color: #00000000">
+                    <button onclick="closeSelector()" style="outline-width: 0px; border-width: 0px; padding: 0px; position: absolute; left: 0px; top: 45px; width: 35px; height: 35px; background-color: #00000000">
                         <img src="images/CloseButton.png" style="width: 35px; height: 35px; margin: 0px;">
                     </button>
-                    <button style="border-width: 0px; padding: 0px; position: absolute; left: 45px; top: 45px; width: 35px; height: 35px; background-color: #00000000">
+                    <button onclick="dig()" style="outline-width: 0px; border-width: 0px; padding: 0px; position: absolute; left: 45px; top: 45px; width: 35px; height: 35px; background-color: #00000000">
                         <img src="images/DigButton.png" style="width: 35px; height: 35px; margin: 0px;">
                     </button>
                 </div>
@@ -63,12 +63,18 @@
     </div>
     <script>
         function startGame(){
-            var menu = document.getElementById("menu");
-            var game = document.getElementById("game");
-            var gameBoard = document.getElementById("gameBoard");
-            var columns = document.getElementById("columns").value;
-            var rows = document.getElementById("rows").value;
-            var actionSelector = document.getElementById("actionSelector");
+            let menu = document.getElementById("menu");
+            let game = document.getElementById("game");
+            game.style.width = "80%";
+            game.style.width = "60%";
+            let gameBoard = document.getElementById("gameBoard");
+            gameBoard.style.width = "100%";
+            gameBoard.style.width = "90%";
+            let columns = Math.trunc(document.getElementById("columns").value);
+            columns = columns <= 100 ? columns : 100;
+            let rows = Math.trunc(document.getElementById("rows").value);
+            rows = rows <= 100 ? rows : 100;
+            let actionSelector = document.getElementById("actionSelector");
             actionSelector.style.display = "none";
             if(columns === "" || rows === ""){
                 alert("Please give column and row values");
@@ -86,37 +92,33 @@
                 for(var j = 0; j<columns; j++){
                     if((j+i)%2 == 0){
                         map[i][j] = elementFromHTML(`
-                        <div id="gameTileDark" style="position: absolute; left: 0; top: 0; width: 100px; height: 100px; outline: 0px solid black;">
-                            <button id="gameTileDark" onclick="openSelector(this)" style="position: absolute; left: 0; top: 0;  width: 100px; height: 100px; outline: 0px solid black;">
+                        <div id="gameTileDark" style="position: absolute; left: 0; top: 0; width: 5vw; height: 5vw; outline: 0px solid black;">
+                            <button id="gameTileDark" onclick="openSelector(this)" style="position: absolute; left: 0; top: 0;  width: 5vw; height: 5vw; outline: 0px solid black;">
 
                             </button>
                         </div>
                         `);
                     } else{
                         map[i][j] = elementFromHTML(`
-                        <div id="gameTileLight" style="position: absolute; left: 0; top: 0;  width: 100px; height: 100px; outline: 0px solid black;">
-                            <button id="gameTileLight" onclick="openSelector(this)" style="position: absolute; left: 0; top: 0;  width: 100px; height: 100px; outline: 0px solid black;">
+                        <div id="gameTileLight" style="position: absolute; left: 0; top: 0;  width: 5vw; height: 5vw; outline: 0px solid black;">
+                            <button id="gameTileLight" onclick="openSelector(this)" style="position: absolute; left: 0; top: 0;  width: 5vw; height: 5vw; outline: 0px solid black;">
 
                             </button>
                         </div>
                         `);
                     } 
+                    var gridSize = map[0][0].offsetWidth;
+                    console.error(gridSize);
                     gameBoard.appendChild(map[i][j]);
-                    map[i][j].style.top = "" + i*100 + "px";
-                    map[i][j].style.left = "" + j*100 + "px";
+                    map[i][j].style.top = "" + i*gridSize + "px";
+                    map[i][j].style.left = "" + j*gridSize + "px";
                 }
             }
-            var gridWidth = "" + 100*columns + "px";
-            gameBoard.style.width = gridWidth;
-            var gridHeight = "" + 100*rows + "px";
-            gameBoard.style.height = gridHeight;
+            console.error(gridSize);
+            var gridWidth = "" + gridSize*columns + "vw";
+            var gridHeight = "" + 100*rows + "vw";
             game.style.width = gridWidth + 80;
             game.style.height = gridHeight + 80;
-            
-            
-            
-
-            runGame(map);
         }
 
         function runGame(map){
@@ -132,6 +134,7 @@
         }
 
         function openSelector(tile){
+
             alert("selector opened");
             var selector = document.getElementById("actionSelector");
             selector.style.display = "block";
@@ -141,10 +144,12 @@
 
         function dig(){
 
+            closeSelector();
         }
 
         function flag(){
 
+            closeSelector();
         }
         function closeSelector(){
             var selector = document.getElementById("actionSelector");
