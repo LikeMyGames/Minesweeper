@@ -1,0 +1,111 @@
+#background{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-size: 10vw;
+    background-image: url('images/backgroundTile.png');
+}
+#menu{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+    top: 10vh;
+    margin-top: 20vh;
+    border: 5px solid #ffdc73ff;
+    background-color: #43ff43;
+    text-align: center;
+    display: block;
+}
+#menuButton{
+    background-color: #00d000;
+    outline: 0px solid #ffdc73ff;
+    border: 5px solid #ffdc73ff;
+    text-align: center;
+}
+#game{
+    display: none;
+    border: 2px solid #ffdc73ff;
+    background-color: #96895fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#gameBoard{
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    /* border: 5px solid #ffdc73ff; */
+    border: 5px solid green;
+    display: grid;
+    width: 1000px;
+    height: 1000px;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(4, 100px)
+    
+}
+#gameTileDark{
+    width: 100px;
+    width: 100px;
+    /* background-color: #00d000; */
+    background-color: red;
+    outline: 0px solid #ffdc73ff;
+}
+#gameTileLight{
+    width: 100px;
+    width: 100px;
+    /* background-color: #43ff43; */
+    background-color: blue;
+    outline: 0px solid #ffdc73ff;
+}
+#flagCount{
+    position: absolute;
+    margin: 0px;
+    width: 40px;
+    height: 20px;
+    left: 25px;
+}
+#gameMenu{
+    text-align: center;
+}
+#rows{
+    outline: 0px solid #ffdc73ff;
+    border: 5px solid #ffdc73ff;
+    background-color: #43ff43;
+    text-align: center;
+    width: 40%;
+    color: #96895fff;
+    margin-bottom: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#columns{
+    outline: 0px solid #ffdc73ff;
+    border: 5px solid #ffdc73ff;
+    background-color: #43ff43;
+    text-align: center;
+    width: 40%;
+    color: #96895fff;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+h1{
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bolder;
+    text-align: center;
+}
+p{
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bolder;
+    text-align: center;
+}
+label{
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bolder;
+    text-align: center;
+}
